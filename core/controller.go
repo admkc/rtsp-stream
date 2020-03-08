@@ -14,11 +14,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Roverr/rtsp-stream/core/auth"
-	"github.com/Roverr/rtsp-stream/core/blacklist"
-	"github.com/Roverr/rtsp-stream/core/config"
+	"github.com/admkc/rtsp-stream/core/auth"
+	"github.com/admkc/rtsp-stream/core/blacklist"
+	"github.com/admkc/rtsp-stream/core/config"
+	"github.com/admkc/streamer"
 	"github.com/julienschmidt/httprouter"
-	"github.com/riltech/streamer"
 	"github.com/sirupsen/logrus"
 )
 
