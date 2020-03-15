@@ -30,7 +30,9 @@ var ErrTimeout = errors.New("Timeout error")
 
 // StreamDTO describes an uri where the client can access the stream
 type StreamDTO struct {
-	URI string `json:"uri"`
+	URI      string `json:"uri"`
+	Live     bool   `json:"live"`
+	Duration int    `json:"duration"`
 }
 
 // StopDTO describes a DTO for the /remove and /stop endpoints
@@ -307,6 +309,8 @@ func (c *Controller) StartStreamHandler(w http.ResponseWriter, r *http.Request, 
 		c.spec.StoreDir,
 		c.spec.KeepFiles,
 		c.spec.Audio,
+		dto.Live,
+		dto.Duration,
 		streamer.ProcessLoggingOpts{
 			Enabled:    c.spec.ProcessLogging.Enabled,
 			Compress:   c.spec.ProcessLogging.Compress,
@@ -315,7 +319,7 @@ func (c *Controller) StartStreamHandler(w http.ResponseWriter, r *http.Request, 
 			MaxBackups: c.spec.ProcessLogging.MaxBackups,
 			MaxSize:    c.spec.ProcessLogging.MaxSize,
 		},
-		25*time.Second,
+		30*time.Second,
 	)
 	stream.Start().Wait()
 	if stream.Running {

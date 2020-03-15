@@ -10,8 +10,8 @@
 [[projects]]
   name = "github.com/admkc/streamer"
   packages = ["."]
-  revision = "eb615de425ec9e63e48d85fcdd0fdfcaf22ac6e4"
-  version = "v1.0.0"
+  revision = "9c6bee842961f4fcb57d7bb01f2e9223f2e4041f"
+  version = "v1.0.3"
 
 [[projects]]
   name = "github.com/davecgh/go-spew"
@@ -94,6 +94,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e5ab16e72699450020e2af533babe99e37d966abf8715ad52b73cc5e9ba1d9ac"
+  inputs-digest = "e65169bf6ec374d764c7a47fdd000859de38a03e5f99c615af0ffb3d8b19845e"
   solver-name = "gps-cdcl"
   solver-version = 1
