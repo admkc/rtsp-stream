@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"log"
 	"net/http"
@@ -40,7 +39,7 @@ func main() {
 		router.POST("/stop", controllers.StopStreamHandler)
 		logrus.Infoln("stop endpoint enabled | MainProcess")
 	}
-	done := controllers.ExitPreHook()
+	//done := controllers.ExitPreHook()
 	handler := cors.AllowAll().Handler(router)
 	if config.CORS.Enabled {
 		handler = cors.New(cors.Options{
@@ -53,13 +52,17 @@ func main() {
 		Addr:    fmt.Sprintf(":%d", config.Port),
 		Handler: handler,
 	}
+	httpsServer := &http.Server{
+		Addr:    fmt.Sprintf(":%d", config.SecurePort),
+		Handler: handler,
+	}
 	go func() {
 		logrus.Infof("rtsp-stream transcoder started on %d | MainProcess", config.Port)
 		log.Fatal(srv.ListenAndServe())
 	}()
-	<-done
-	if err := srv.Shutdown(context.Background()); err != nil {
-		logrus.Errorf("HTTP server Shutdown: %v", err)
-	}
+
+	logrus.Infof("rtsp-stream transcoder started on %d | MainProcess", config.SecurePort)
+	log.Fatal(httpsServer.ListenAndServeTLS("./certs/foo.crt", "./certs/foo.key"))
+
 	os.Exit(0)
 }
