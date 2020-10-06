@@ -4,7 +4,8 @@ services:
     build: .
     image: rtsp_server:2.1
     ports:
-      - 8053:8080
+      - 8080:8080
+      - 8081:8081
     environment:
       - RTSP_STREAM_CORS_ENABLED=true
       - RTSP_STREAM_DEBUG=false

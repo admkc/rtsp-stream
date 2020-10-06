@@ -15,4 +15,5 @@ RUN apk update && apk add bash ca-certificates ffmpeg && rm -rf /var/cache/apk/*
 WORKDIR /app
 COPY --from=build-env /go/src/github.com/admkc/rtsp-stream/server /app/
 COPY ./build/rtsp-stream.yml /app/rtsp-stream.yml
+COPY ./certs /app/certs/
 ENTRYPOINT [ "/app/server" ]
